@@ -50,7 +50,8 @@ VALIDATE $? "changing kubectl file permission to execute"
 mv kubectl  /usr/local/bin/ &>>$LOGFILE
 VALIDATE $? "Moving kubectl from current folder to bin folder"
 
-kubectl version --client &>>$LOGFILE
+#kubectl version --client &>>$LOGFILE
+kubectl version &>>$LOGFILE
 VALIDATE $? "kubectl version"
 echo "*************   eksctl installation - end *************"
 
