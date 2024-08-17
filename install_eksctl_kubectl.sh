@@ -21,19 +21,19 @@ VALIDATE(){
     fi
 }
 
-if [ $USERID -ne 0 ]
-then
-    echo "Please run this script with root access."
-    exit 1 # manually exit if error comes.
-else
-    echo "You are super user."
-fi
+# if [ $USERID -ne 0 ]
+# then
+#     echo "Please run this script with root access."
+#     exit 1 # manually exit if error comes.
+# else
+#     echo "You are super user."
+# fi
 
 echo "*************   eksctl installation - start *************"
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp &>>$LOGFILE
 VALIDATE $? "Installing eksctl "
 
-mv /tmp/eksctl /usr/local/bin &>>$LOGFILE
+sudo mv /tmp/eksctl /usr/local/bin &>>$LOGFILE
 VALIDATE $? "Moving eksctl from tmp to bin folder"
 
 eksctl version &>>$LOGFILE
@@ -44,15 +44,14 @@ echo "*************   eksctl installation - start *************"
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.30.0/2024-05-12/bin/linux/amd64/kubectl &>>$LOGFILE
 VALIDATE $? "Installing kubectl"
 
-chmod +x ./kubectl &>>$LOGFILE
+sudo chmod +x ./kubectl &>>$LOGFILE
 VALIDATE $? "changing kubectl file permission to execute"
 
-mv kubectl  /usr/local/bin/ &>>$LOGFILE
+sudo mv kubectl  /usr/local/bin/ &>>$LOGFILE
 VALIDATE $? "Moving kubectl from current folder to bin folder"
 
-#kubectl version --client &>>$LOGFILE
-kubectl version &>>$LOGFILE
-VALIDATE $? "kubectl version"
+kubectl version --client &>>$LOGFILE
+VALIDATE $? "kubectl version "
 echo "*************   eksctl installation - end *************"
 
 
