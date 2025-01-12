@@ -1,5 +1,4 @@
 #!/bin/bash
-
 USERID=$(id -u)
 TIMESTAMP=$(date +%F-%H-%M-%S)
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
@@ -8,9 +7,7 @@ LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
 R="\e[31m"
 G="\e[32m"
 N="\e[0m"
-
 echo "Script started executing at:$TIMESTAMP"
-
 VALIDATE(){
     if [ $1 -ne 0 ]
     then 
@@ -21,13 +18,13 @@ VALIDATE(){
     fi
 }
 
-# if [ $USERID -ne 0 ]
-# then
-#     echo "Please run this script with root access."
-#     exit 1 # manually exit if error comes.
-# else
-#     echo "You are super user."
-# fi
+if [ $USERID -ne 0 ]
+then
+    echo "Please run this script with root access."
+    exit 1 # manually exit if error comes.
+else
+    echo "You are super user."
+fi
 
 echo "*************   eksctl installation - start *************"
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp &>>$LOGFILE
@@ -53,7 +50,6 @@ VALIDATE $? "Moving kubectl from current folder to bin folder"
 kubectl version --client &>>$LOGFILE
 VALIDATE $? "kubectl version "
 echo "*************   eksctl installation - end *************"
-
 
 echo "*************   eksctl cluster creation started *************"
 eksctl create cluster --config-file=eks.yaml &>>$LOGFILE
