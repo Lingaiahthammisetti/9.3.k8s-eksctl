@@ -37,7 +37,7 @@ eksctl version &>>$LOGFILE
 VALIDATE $? "eksctl version"
 echo "*************   eksctl installation - end *************"
 
-echo "*************   eksctl installation - start *************"
+echo "*************   kubectl installation - start *************"
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.30.0/2024-05-12/bin/linux/amd64/kubectl &>>$LOGFILE
 VALIDATE $? "Installing kubectl"
 
@@ -49,7 +49,7 @@ VALIDATE $? "Moving kubectl from current folder to bin folder"
 
 kubectl version --client &>>$LOGFILE
 VALIDATE $? "kubectl version "
-echo "*************   eksctl installation - end *************"
+echo "*************   kubectl installation - end *************"
 
 echo "*************   eksctl cluster creation started *************"
 eksctl create cluster --config-file=eks.yaml &>>$LOGFILE
