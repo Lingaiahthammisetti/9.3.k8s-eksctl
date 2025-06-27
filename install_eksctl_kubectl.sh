@@ -55,3 +55,9 @@ echo "*************   eksctl cluster creation started *************"
 eksctl create cluster --config-file=eks.yaml &>>$LOGFILE
 VALIDATE $? "eksctl cluster creation process"
 echo "*************   eksctl cluster creation completed *************"
+
+# Note: a kubeconfig file that kubectl uses to connect to the cluster.
+echo "****** update kubeconfig file to cluster - Started**********"
+aws eks update-kubeconfig --region us-east-1 --name expense &>>$LOGFILE
+VALIDATE $? "eksctl cluster update kubeconfig file to cluster"
+echo "****** update kubeconfig file to cluster - completed *******"

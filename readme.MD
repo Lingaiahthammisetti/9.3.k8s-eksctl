@@ -1,3 +1,10 @@
+# Note: When you create an EKS cluster with eksctl, it generates a kubeconfig file that kubectl uses to connect to the cluster.
+```
+aws eks update-kubeconfig --region us-east-1 --name expense &>>$LOGFILE
+```
+
+
+
 #What are difference between roles: DevOps Engineer, SRE, Cloud Engineers, Platform Engineers?#
 
 DevOps engineers automate workflows, code infrastructure, and ensure smooth deployments(Tools: Jenkins, Docker, Kubernetes).
