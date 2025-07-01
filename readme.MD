@@ -7,8 +7,9 @@ eksctl create cluster --config-file=eks.yaml
 ```
 aws eks update-kubeconfig --region us-east-1 --name expense &>>$LOGFILE
 ```
-
-
+```
+eksctl delete cluster --config-file=eks.yaml
+```
 
 #What are difference between roles: DevOps Engineer, SRE, Cloud Engineers, Platform Engineers?#
 
